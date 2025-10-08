@@ -1,0 +1,45 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["main"]
+  #pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-bicep:
+    name: Build Bicep
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Login With OpenID Connect
+      - name: "Login via Azure CLI"
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - uses: azure/bicep-deploy@v2
+        id: bicep-deploy
+        with:
+          type: deploymentStack
+          operation: create
+          name: Development
+          location: australiaeast
+          scope: resourceGroup
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
+          resource-group-name: rg-computer-vision-australiaeast-001
+          template-file: ./bicep/main.bicep
+          #parameters-file: ./bicep/parameters.json
+          action-on-unmanage-resources: delete # Delete unmanaged resources
+          deny-settings-mode: none # Allow write and delete operations
+
