@@ -57,3 +57,7 @@ and then set the following as GitHub secrets
 eg. via the GitHub CLI
 
 ```bash
+gh secret set AZURE_CLIENT_ID --body "xxxx"
+gh secret set AZURE_TENANT_ID --body "xxxx"
+gh secret set AZURE_SUBSCRIPTION_ID --body "xxxxx"
+```
