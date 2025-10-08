@@ -46,15 +46,20 @@ jobs:
       - name: "Install .NET SDK"
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: "10.0.x"
 
       - name: "Run app"
         run: |
           # Get the endpoint and key Azure CLI
           AI_SERVICE_ENDPOINT=$(az cognitiveservices account show --name cv-computer-vision-eastus-001 --resource-group rg-computer-vision-eastus-001 --query "properties.endpoint" --output tsv)
 
+          echo "Using endpoint: $AI_SERVICE_ENDPOINT"
+
           AI_SERVICE_KEY=$(az cognitiveservices account keys list --name cv-computer-vision-eastus-001 --resource-group rg-computer-vision-eastus-001 --query "key1" -o tsv)
           echo "::add-mask::$AI_SERVICE_KEY"
+
+          export AI_SERVICE_ENDPOINT
+          export AI_SERVICE_KEY
 
           dotnet run Analyze.cs
         working-directory: Labfiles/analyze-images
