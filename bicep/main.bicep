@@ -1,7 +1,7 @@
-param computer_vision_name string = 'cv-computer-vision-australiaeast-001'
+param computer_vision_name string = 'cv-computer-vision-eastus-001'
 param location string = resourceGroup().location
 
-resource accounts_cv_computer_vision_australiaeast_001_name_resource 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
+resource accounts_cv_computer_vision 'Microsoft.CognitiveServices/accounts@2025-06-01' = {
   name: computer_vision_name
   location: location
   sku: {

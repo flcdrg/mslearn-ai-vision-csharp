@@ -34,10 +34,10 @@ jobs:
           type: deploymentStack
           operation: create
           name: Development
-          location: australiaeast
+          location: eastus
           scope: resourceGroup
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID}}
-          resource-group-name: rg-computer-vision-australiaeast-001
+          resource-group-name: rg-computer-vision-eastus-001
           template-file: ./bicep/main.bicep
           #parameters-file: ./bicep/parameters.json
           action-on-unmanage-resources: delete # Delete unmanaged resources

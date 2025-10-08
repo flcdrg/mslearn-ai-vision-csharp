@@ -4,18 +4,19 @@ C# implementation of [mslearn-ai-vision](https://github.com/MicrosoftLearning/ms
 
 These modules are used in the Microsoft Learn [Develop computer vision solutions in Azure](https://learn.microsoft.com/training/paths/create-computer-vision-solutions-azure-ai/?WT.mc_id=DOP-MVP-5001655) learning path.
 
-
 ## Development notes
 
 ## Infrastructure
 
+Note that not all regions support all features of Azure AI Vision. See <https://learn.microsoft.com/azure/ai-services/computer-vision/overview-image-analysis?WT.mc_id=DOP-MVP-5001655> for details.
+
 ```bash
-az group create --location australiaeast --resource-group rg-computer-vision-australiaeast-001
+az group create --location eastus --resource-group rg-computer-vision-eastus-001
 ```
 
 ```bash
 # Prepare a service principal for Login with OIDC
-az ad sp create-for-rbac --name sp-computer-vision-australiaeast-001 --role Contributor --scopes /subscriptions/<yoursubscription>/resourceGroups/rg-computer-vision-australiaeast-001
+az ad sp create-for-rbac --name sp-computer-vision-eastus-001 --role Contributor --scopes /subscriptions/<yoursubscription>/resourceGroups/rg-computer-vision-eastus-001
 ```
 
 Make a note of the appId value, as you'll enter that as the `--id` parameter.
